@@ -1,5 +1,7 @@
 from collections import defaultdict
-
+from this import d
+import time
+start_time = time.time()
 ## TUGAS BESAR STRATEGI ALGORITMA
 ## PERBANDINGAN ALGORITMA BRUTE FORCE DAN DIVIDE & CONQUER UNTUK MENYELESAIKAN KASUS POKER HAND COMBINATION
 ## KELOMPOK 9:
@@ -162,6 +164,9 @@ def testBruteForce():
 
     combination(value)
 
+    waktu = time.time() - start_time
+    print(" %s second " % (waktu))
+
 ## Main Program Untuk Uji Coba Algoritma Divide & Conquer
 def testDivideConquer():
     print("Uji Program Menggunakan Algoritma Divide & Conquer")
@@ -178,6 +183,8 @@ def testDivideConquer():
 
     combination(value)
 
+    waktu = time.time() - start_time
+    print(" %s second " % (waktu))
 
-testBruteForce()
+##testBruteForce()
 testDivideConquer()
