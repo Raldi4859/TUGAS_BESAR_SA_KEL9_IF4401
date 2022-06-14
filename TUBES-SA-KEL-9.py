@@ -179,3 +179,5 @@ def testDivideConquer():
     combination(value)
 
 
+testBruteForce()
+testDivideConquer()
