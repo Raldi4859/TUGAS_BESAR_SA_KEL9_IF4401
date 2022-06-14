@@ -59,7 +59,7 @@ def inputValue(suits):
 
 ## Fungsi untuk menampilkan kesimpulan kombinasi kartu
 def combination(arr):
-    cardOrder = {"1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "11":11, "12":12, "13":13}
+    cardOrder = {"1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "11":11, "11":12, "13":13}
     n = len(arr)
     card = ()
     values = [i[0] for i in arr]
