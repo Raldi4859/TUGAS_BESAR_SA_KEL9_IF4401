@@ -1,5 +1,3 @@
-from collections import defaultdict
-from this import d
 import time
 start_time = time.time()
 ## TUGAS BESAR STRATEGI ALGORITMA
@@ -12,78 +10,54 @@ start_time = time.time()
 
 ## Fungsi Input Tipe Kartu
 def inputSuits():
-  suits = []
-  n = 5
+    suits = []
+    flush = False
 
-
-  print("Tipe Kartu : D = Diamond, H = Heart, C = Club, S = Spade")
-  print("Contoh Input: ")
-  print("D")
-  print("D")
-  print("D")
-  print("D")
-  print("D")
-  print("Masukkan Tipe Kartu: ")
-
-  suits = [str(input()) for i in range(n)]
+    print("Tipe Kartu : D = Diamond, H = Heart, C = Club, S = Spade")
+    print("Contoh Input: D,D,D,D,D ")
+    print("Masukkan Tipe Kartu: ")
+    suits = list(map(str, input().upper().split(',')))
   
-  if suits == ['D', 'D', 'D', 'D','D']:
-    print("Tipe Kartu: Diamond")
-  elif suits == ['S', 'S', 'S', 'S', 'S']:
-    print("Tipe Kartu: Spade")
-  elif suits == ['C', 'C', 'C', 'C', 'C']:
-    print("Tipe Kartu: Club")
-  elif suits == ['H', 'H', 'H','H', 'H']:
-    print("Tipe Kartu: Heart")
-  return suits
+    return suits
 
 ## Fungsi Input Nilai Kartu
-def inputValue(suits):
-  value = []
-  n = 5
+def inputValue(suits, flush):
+    value = []
 
-  if suits == ['D', 'D', 'D', 'D', 'D'] or suits == ['C', 'C', 'C', 'C', 'C'] or suits == ['S', 'S', 'S', 'S', 'S'] or suits == ['H', 'H', 'H','H', 'H']:
     print("Nilai Kartu: Ace(A) = 1, King(K) = 13, Queen(Q) = 12, Jack(J) = 11, 10,..,2")
-    print("Contoh Input: ")
-    print("1")
-    print("2")
-    print("3")
-    print("4")
-    print("5")
+    print("Contoh Input: 1,13,12,11,10 ")
     print("Masukkan Nilai Kartu: ")
-    value = [str(input()) for i in range(n)]
+    value = list(map(int, input().split(',')))
     print("Nilai Kartu: ")
     print(value)
-  else:
-    print("Kombinasi Kartu Bukan Merupakan Flush, Straight Flush, atau Royal Flush")
+  
+    return value
 
-  return value
+def isFlush(suits):
+    flush = False
+    if suits == ['D','D','D','D','D'] or suits == ['C','C','C','C','C'] or suits == ['S','S','S','S','S'] or suits == ['H','H','H','H','H']:
+        flush = True
+    else:
+        flush = False
+    return flush
+
 
 ## Fungsi untuk menampilkan kesimpulan kombinasi kartu
-def combination(arr):
-    cardOrder = {"1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "11":11, "11":12, "13":13}
-    n = len(arr)
+def combination(value,flush):
     card = ()
-    values = [i[0] for i in arr]
-    valueCount = defaultdict(lambda:0)
+    arrCount = 0
 
-    if arr == ["1", "10", "11", "12", "13"]:
-        card = "Kombinasi Kartu adalah Royal Flush"
+    if flush == True:
+        if value == [1,10,11,12,13]:
+            card = print("Kombinasi Kartu adalah Royal Flush")
+        elif value == [value[0], value[0]+1, value[0]+2, value[0]+3, value[0]+4]:
+            card = print("Kombinasi Kartu adalah Straight Flush")
+        else:
+            card = print("Kombinasi Kartu adalah Flush")
     else:
-        try:
-            for v in values:
-                valueCount[v] += 1
-            rankValue = [cardOrder[i] for i in values]
-            valueRange = max(rankValue) - min(rankValue)
-            if len(set(valueCount.values())) == 1 and (valueRange == 4):
-                card = "Kombinasi Karttu adalah Straight Flush"
-            else:
-                card = "Kombinasi Kartu adalah Flush"
-        except Exception:
-            pass
-        
-    if card != ():
-        print(card)
+        card = print("Kombinasi Kartu Bukan Flush, Straight Flush atau Royal Flush")
+
+    return card
         
 ## Fungsi Brute Force Menggunakan Bubble Sort
 def BruteForce(arr):
@@ -153,7 +127,8 @@ def DivideConquer(arr, l, r):
 def testBruteForce():
     print("Uji Program Menggunakan Algoritma Brute Force")
     suits = inputSuits()
-    value = inputValue(suits)
+    flush = isFlush(suits)
+    value = inputValue(suits,flush)
  
     BruteForce(value)
  
@@ -162,7 +137,7 @@ def testBruteForce():
         for i in range(len(value)):
             print(value[i], suits[i])
 
-    combination(value)
+    combination(value,flush)
 
     waktu = time.time() - start_time
     print(" %s second " % (waktu))
@@ -171,7 +146,8 @@ def testBruteForce():
 def testDivideConquer():
     print("Uji Program Menggunakan Algoritma Divide & Conquer")
     suits = inputSuits()
-    value = inputValue(suits)
+    flush = isFlush(suits)
+    value = inputValue(suits,flush)
 
     n = len(value)
     DivideConquer(value, 0, n-1)
@@ -181,10 +157,10 @@ def testDivideConquer():
         for i in range(len(value)):
             print(value[i], suits[i])
 
-    combination(value)
+    combination(value,flush)
 
     waktu = time.time() - start_time
     print(" %s second " % (waktu))
 
-##testBruteForce()
-testDivideConquer()
+testBruteForce()
+##testDivideConquer()
