@@ -14,7 +14,7 @@ def inputSuits():
     flush = False
 
     print("Tipe Kartu : D = Diamond, H = Heart, C = Club, S = Spade")
-    print("Contoh Input: D,D,D,D,D ")
+    print("Contoh Input: D,D,D,D,D atau s,s,s,s,s ")
     print("Masukkan Tipe Kartu: ")
     suits = list(map(str, input().upper().split(',')))
   
