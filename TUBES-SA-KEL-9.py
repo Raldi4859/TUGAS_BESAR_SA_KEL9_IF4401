@@ -11,7 +11,6 @@ start_time = time.time()
 ## Fungsi Input Tipe Kartu
 def inputSuits():
     suits = []
-    flush = False
 
     print("Tipe Kartu : D = Diamond, H = Heart, C = Club, S = Spade")
     print("Contoh Input: D,D,D,D,D atau s,s,s,s,s ")
@@ -73,7 +72,6 @@ def BruteForce(arr):
             return
 
 ## Fungsi Divide & Conquer Menggunakan Merge Sort
-
 ## Code untuk melakukan merge
 def merge(arr, l, m, r):
     n1 = m - l + 1
@@ -162,5 +160,5 @@ def testDivideConquer():
     waktu = time.time() - start_time
     print(" %s second " % (waktu))
 
-testBruteForce()
-##testDivideConquer()
+##testBruteForce()
+testDivideConquer()
